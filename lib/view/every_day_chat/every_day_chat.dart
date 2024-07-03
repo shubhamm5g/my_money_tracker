@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:my_money_tracker/consts/consts.dart';
 
 class EveryDayChat extends StatelessWidget {
@@ -25,18 +26,36 @@ class EveryDayChat extends StatelessWidget {
         bottomSheet: Row(
           children: [
             Container(
-              width: context.screenWidth,
+              color: whiteColor,
+              width: context.screenWidth * 0.7,
               child: TextField(
                 decoration: InputDecoration(
+                    hintText: "Type Here",
                     isCollapsed: true,
-                    contentPadding: EdgeInsets.all(10),
+                    contentPadding: const EdgeInsets.all(10),
                     focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: greyColor),
+                        borderSide: const BorderSide(color: greyColor),
+                        borderRadius: BorderRadius.circular(100)),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: greyColor),
                         borderRadius: BorderRadius.circular(100)),
                     filled: true,
                     fillColor: greyColor),
               ),
+            ),
+            Container(
+              height: 42,
+              alignment: Alignment.center,
+              padding: EdgeInsets.all(8.0),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Text("Enter")]),
             )
+                .box
+                .color(greyColor)
+                .width(context.screenWidth * 0.3)
+                .roundedLg
+                .make()
           ],
         ));
   }
