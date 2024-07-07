@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:my_money_tracker/consts/consts.dart';
 
 class EveryDayChat extends StatelessWidget {
@@ -7,8 +10,82 @@ class EveryDayChat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-          appBar: selfChatAppBar(context), bottomSheet: bottomSheet(context)),
+        child: Scaffold(
+      appBar: selfChatAppBar(context),
+      body: chatScreen(context),
+    ));
+  }
+
+  Column chatScreen(BuildContext context) {
+    return Column(
+      children: [chats(), bottomSheet(context)],
+    );
+  }
+
+  Expanded chats() {
+    return Expanded(
+      child: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
+        reverse: true,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 9.0, vertical: 10),
+          child: Column(children: [
+            ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      height: 40,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: greyColor,
+                      ),
+                      child: const Center(
+                          child: Text(
+                        "+200",
+                        style: TextStyle(color: greenColor),
+                      )),
+                    ),
+                    Container(
+                      constraints:
+                          BoxConstraints(maxWidth: context.screenWidth * 0.7),
+                      margin: const EdgeInsets.symmetric(vertical: 1),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 10),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(10),
+                            topLeft: Radius.circular(10),
+                            bottomLeft: Radius.circular(10)),
+                        color: greyColor,
+                      ),
+                      child: const Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Flexible(
+                            child: Text("0 "),
+                          ),
+                          Text(
+                            "20:20",
+                            style:
+                                TextStyle(fontSize: 10, color: darkGreyColor),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                );
+              },
+            )
+          ]),
+        ),
+      ),
     );
   }
 
@@ -18,25 +95,49 @@ class EveryDayChat extends StatelessWidget {
       color: whiteColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          SizedBox(
-            width: context.screenWidth * 0.7,
-            child: TextField(
-              decoration: InputDecoration(
-                  hintText: "Type Here",
-                  isCollapsed: true,
-                  contentPadding: const EdgeInsets.all(10),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: greyColor),
-                      borderRadius: BorderRadius.circular(100)),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: greyColor),
-                      borderRadius: BorderRadius.circular(100)),
-                  filled: true,
-                  fillColor: greyColor),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Container(
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30.0),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: darkGreyColor,
+                        spreadRadius: 0.11,
+                        blurRadius: 0.11,
+                        offset: Offset(0.1, 0.1),
+                      )
+                    ]),
+                child: const TextField(
+                  maxLines: 5,
+                  minLines: 1,
+                  decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(10.0),
+                      hintText: "Type Here",
+                      isCollapsed: true,
+                      border: InputBorder.none,
+                      filled: true,
+                      fillColor: greyColor),
+                ),
+              ),
             ),
           ),
+          5.widthBox,
           Container(
+            width: 100,
+            decoration: BoxDecoration(
+                color: greyColor,
+                borderRadius: BorderRadius.circular(30),
+                boxShadow: const [
+                  BoxShadow(
+                      color: darkGreyColor,
+                      spreadRadius: 0.1,
+                      blurRadius: 0.1,
+                      offset: Offset(0.1, 0.5))
+                ]),
             height: 42,
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8.0),
@@ -44,11 +145,6 @@ class EveryDayChat extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [Text("Enter")]),
           )
-              .box
-              .color(greyColor)
-              .width(context.screenWidth * 0.29)
-              .roundedLg
-              .make()
         ],
       ),
     );
@@ -71,15 +167,15 @@ class EveryDayChat extends StatelessWidget {
                 Row(
                   children: [
                     10.widthBox,
-                    const SizedBox()
-                        .box
-                        .size(45, 45)
-                        .roundedFull
-                        .color(greyColor)
-                        .make(),
-                    const WidthBox(5),
+                    const SizedBox(
+                      child: Icon(
+                        FontAwesomeIcons.solidUser,
+                        color: darkGreyColor,
+                      ),
+                    ).box.size(45, 45).roundedFull.color(greyColor).make(),
+                    const WidthBox(10),
                     Column(
-                      children: ["Self Chat (Monthly)".text.bold.make()],
+                      children: ["Self Chat (2 Month)".text.make()],
                     )
                   ],
                 ),
@@ -121,8 +217,8 @@ class EveryDayChat extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  "\$ ".text.color(Colors.red).size(14).make(),
-                  "0".numCurrency.text.color(Colors.red).size(14).make(),
+                  "\$ ".text.color(redColor).size(14).make(),
+                  "0".numCurrency.text.color(redColor).size(14).make(),
                 ],
               )
             ],
@@ -137,8 +233,8 @@ class EveryDayChat extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  "\$ ".text.color(Colors.green).size(14).make(),
-                  "0".numCurrency.text.color(Colors.green).size(14).make(),
+                  "\$ ".text.color(greenColor).size(14).make(),
+                  "0".numCurrency.text.color(greenColor).size(14).make(),
                 ],
               )
             ],
