@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:my_money_tracker/consts/consts.dart';
 import 'package:my_money_tracker/view/every_day_chat/every_day_chat.dart';
-import 'package:my_money_tracker/view/every_day_chat/test.dart';
 
 void main() {
   runApp(const MainApp());
