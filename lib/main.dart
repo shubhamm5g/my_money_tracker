@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:my_money_tracker/consts/consts.dart';
 import 'package:my_money_tracker/view/every_day_chat/every_day_chat.dart';
+import 'package:my_money_tracker/view/testing/testing.dart';
 
 void main() {
   runApp(const MainApp());
@@ -12,7 +13,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: EveryDayChat());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: Testing());
   }
 }
 
@@ -24,11 +25,11 @@ class Test extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          constraints: BoxConstraints(maxWidth: 200),
-          padding: EdgeInsets.all(10),
+          constraints: const BoxConstraints(maxWidth: 200),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10), color: Colors.red),
-          child: Row(
+          child: const Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Flexible(

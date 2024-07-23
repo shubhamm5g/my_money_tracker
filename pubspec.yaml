@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
   font_awesome_flutter: ^10.7.0
   get: ^4.6.6
+  path: ^1.9.0
+  sqflite: ^2.3.3+1
   velocity_x: ^4.2.1
 
 dev_dependencies:
